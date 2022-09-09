@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late List<PrevisaoHora> ultimasPrevisoes;
+  List<PrevisaoHora>? ultimasPrevisoes;
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
             ),
             const Padding(padding: EdgeInsets.all(10)),
             ProximasTemperaturas(
-              previsoes: ultimasPrevisoes,
+              previsoes: ultimasPrevisoes!,
             )
           ],
         ),

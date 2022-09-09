@@ -9,24 +9,30 @@ class ProximasTemperaturas extends StatelessWidget {
 
   const ProximasTemperaturas({super.key, required this.previsoes});
 
+  Card criarCardPrevisao(int i) {
+    return Card(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Image(image: AssetImage('images/${previsoes[i].numeroIcone}.png')),
+        Padding(padding: EdgeInsets.all(2)),
+        Text(previsoes[i].horario),
+        Padding(padding: EdgeInsets.all(5)),
+        Text('${previsoes[i].temperatura.toStringAsFixed(0)} ºC'),
+        Padding(padding: EdgeInsets.all(5)),
+        Text(previsoes[i].descricao),
+      ],
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: ListView(
-      children: [
-        Card(
-          child: Text('${previsoes[0].temperatura.toStringAsFixed(0)}ºC'),
-        ),
-        Card(
-          child: Text('${previsoes[1].temperatura.toStringAsFixed(0)}ºC'),
-        ),
-        Card(
-          child: Text('${previsoes[2].temperatura.toStringAsFixed(0)}ºC'),
-        ),
-        Card(
-          child: Text('${previsoes[3].temperatura.toStringAsFixed(0)}ºC'),
-        ),
-      ],
-    ));
+        child: ListView.builder(
+            itemCount: previsoes.length,
+            shrinkWrap: true,
+            itemBuilder: (context, i) {
+              return criarCardPrevisao(i);
+            }));
   }
 }
