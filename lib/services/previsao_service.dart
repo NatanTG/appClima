@@ -5,22 +5,23 @@ import 'dart:convert';
 
 class PrevisaoService {
   final String baseUrlAPI = 'dataservice.accuweather.com';
-  final String path = '/forecast/v1/hourly/12hour/${env["CITY_CODE"]}';
-  final Map<String, String> params = {
-    'apikey': env['API_KEY'],
+  final String path = '/forecasts/v1/hourly/12hour/${dotenv.env["CITY_CODE"]}';
+  final Map<String, dynamic> params = {
+    'apikey': dotenv.env['API_KEY'],
     'language': 'pt-BR',
     'metric': 'true'
-  }
-  List<PrevisaoHora> recuperarUltimasPrevisoes() {
-    final Response resposta = await get(Uri.https(baseUrlAPI, path, params));
+  };
+  Future<List<PrevisaoHora>> recuperarUltimasPrevisoes() async {
+    final uri = Uri.https(baseUrlAPI, path, params);
+    final Response resposta = await get(uri);
 
-    if(resposta.statusCode == 200){
+    if (resposta.statusCode == 200) {
       Iterable it = json.decode(resposta.body);
       List<PrevisaoHora> previsoes = List.from(
-        it.map((objJson) => PrevisaoHora.transformarJSON(objJson));
+        it.map((objJson) => PrevisaoHora.transformarJSON(objJson)),
       );
       return previsoes;
-    } else{
+    } else {
       throw Exception("Falha ao carregar as previsões");
     }
   }
