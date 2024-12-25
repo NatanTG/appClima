@@ -1,6 +1,6 @@
 # AppClima
 
-Este é um aplicativo climático desenvolvido por Natã e Gustavo, que consome a API de tempo da AccuWeather para fornecer informações precisas sobre as condições climáticas de diferentes cidades.
+Este é um aplicativo climático desenvolvido por Natã, que consome a API de tempo da AccuWeather para fornecer informações precisas sobre as condições climáticas de diferentes cidades.
 
 ## Funcionalidades
 
